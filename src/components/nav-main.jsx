@@ -20,7 +20,8 @@ import {
 } from "@/components/ui/sidebar"
 
 export function NavMain({
-  items
+  items,
+  onSelect
 }) {
   return (
     <SidebarGroup>
@@ -30,10 +31,13 @@ export function NavMain({
           <Collapsible key={item.title} asChild defaultOpen={item.isActive}>
             <SidebarMenuItem>
               <SidebarMenuButton asChild tooltip={item.title}>
-                <a href={item.url}>
+              <button
+                  onClick={() => onSelect(item.title.toLowerCase().replace(" ", ""))}
+                  className="flex items-center gap-2 w-full"
+                >
                   <item.icon />
                   <span>{item.title}</span>
-                </a>
+                </button>
               </SidebarMenuButton>
               {item.items?.length ? (
                 <>
@@ -48,9 +52,12 @@ export function NavMain({
                       {item.items?.map((subItem) => (
                         <SidebarMenuSubItem key={subItem.title}>
                           <SidebarMenuSubButton asChild>
-                            <a href={subItem.url}>
-                              <span>{subItem.title}</span>
-                            </a>
+                            <button
+                                onClick={() => onSelect(subItem.title.toLowerCase().replace("ã", "a").replace("í", "i").replace(" ", ""))}
+                                className="w-full text-left"
+                              >
+                                <span>{subItem.title}</span>
+                              </button>
                           </SidebarMenuSubButton>
                         </SidebarMenuSubItem>
                       ))}
