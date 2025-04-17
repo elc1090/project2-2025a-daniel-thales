@@ -26,6 +26,9 @@ export default function Page() {
           <SidebarInset>
             <div className="flex flex-1 flex-col gap-4 p-4">
               {selectedContent === "exercícios" && <h1>Exercícios!</h1>}
+              {selectedContent === "bíceps" && <h1>Exercícios! Bíceps</h1>}
+              {selectedContent === "costas" && <h1>Exercícios! Coastas</h1>}
+              {selectedContent === "abdômen" && <h1>Exercícios! Abdômen</h1>}
               {selectedContent === "meusfavoritos" && <h1>Meus Favoritos</h1>}
               {selectedContent === "meustreinos" && <h1>Meus Treinos</h1>}
               {selectedContent === "meuperfil" && <h1>Meu Perfil</h1>}
