@@ -2,16 +2,12 @@
 
 import * as React from "react"
 import {
-  BookOpen,
-  Bot,
+  Heart,
   Command,
-  Frame,
-  LifeBuoy,
-  Map,
-  PieChart,
-  Send,
+  CircleUserRound,
   Settings2,
-  SquareTerminal,
+  BookHeart,
+  Dumbbell
 } from "lucide-react"
 
 import { NavMain } from "@/components/nav-main"
@@ -36,118 +32,47 @@ const data = {
   },
   navMain: [
     {
-      title: "Playground",
+      title: "Exercícios",
       url: "#",
-      icon: SquareTerminal,
+      icon: Dumbbell,
       isActive: true,
       items: [
         {
-          title: "History",
+          title: "Bíceps",
           url: "#",
         },
         {
-          title: "Starred",
+          title: "Costas",
           url: "#",
         },
         {
-          title: "Settings",
+          title: "Abdômen",
           url: "#",
         },
       ],
     },
     {
-      title: "Models",
+      title: "Meus treinos",
       url: "#",
-      icon: Bot,
-      items: [
-        {
-          title: "Genesis",
-          url: "#",
-        },
-        {
-          title: "Explorer",
-          url: "#",
-        },
-        {
-          title: "Quantum",
-          url: "#",
-        },
-      ],
+      icon: BookHeart,
     },
     {
-      title: "Documentation",
+      title: "Meus favoritos",
       url: "#",
-      icon: BookOpen,
-      items: [
-        {
-          title: "Introduction",
-          url: "#",
-        },
-        {
-          title: "Get Started",
-          url: "#",
-        },
-        {
-          title: "Tutorials",
-          url: "#",
-        },
-        {
-          title: "Changelog",
-          url: "#",
-        },
-      ],
+      icon: Heart,
     },
-    {
-      title: "Settings",
-      url: "#",
-      icon: Settings2,
-      items: [
-        {
-          title: "General",
-          url: "#",
-        },
-        {
-          title: "Team",
-          url: "#",
-        },
-        {
-          title: "Billing",
-          url: "#",
-        },
-        {
-          title: "Limits",
-          url: "#",
-        },
-      ],
-    },
+
   ],
   navSecondary: [
     {
-      title: "Support",
+      title: "Meu perfil",
       url: "#",
-      icon: LifeBuoy,
+      icon: CircleUserRound,
     },
     {
-      title: "Feedback",
+      title: "Preferências",
       url: "#",
-      icon: Send,
-    },
-  ],
-  projects: [
-    {
-      name: "Design Engineering",
-      url: "#",
-      icon: Frame,
-    },
-    {
-      name: "Sales & Marketing",
-      url: "#",
-      icon: PieChart,
-    },
-    {
-      name: "Travel",
-      url: "#",
-      icon: Map,
+      icon: Settings2,
     },
   ],
 }
@@ -179,7 +104,6 @@ export function AppSidebar({
       </SidebarHeader>
       <SidebarContent>
         <NavMain items={data.navMain} />
-        <NavProjects projects={data.projects} />
         <NavSecondary items={data.navSecondary} className="mt-auto" />
       </SidebarContent>
       <SidebarFooter>
