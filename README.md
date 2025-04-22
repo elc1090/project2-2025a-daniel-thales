@@ -45,3 +45,9 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 ## Tecnologias
 
 - UI Library: https://ui.shadcn.com/
+
+# TODO:
+
+- Estudar API
+- Estudar como fazer requests
+- Estudar como fazer a persistência local
