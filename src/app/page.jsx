@@ -8,6 +8,7 @@ import {
   SidebarInset,
   SidebarProvider,
 } from "@/components/ui/sidebar"
+import { ExercisesPage } from "@/components/exercises-page"
 
 export const iframeHeight = "800px"
 
@@ -25,7 +26,7 @@ export default function Page() {
           <AppSidebar onSelect={setSelectedContent} />
           <SidebarInset>
             <div className="flex flex-1 flex-col gap-4 p-4">
-              {selectedContent === "exercícios" && <h1>Exercícios!</h1>}
+              {selectedContent === "exercícios" && <ExercisesPage />}
               {selectedContent === "bíceps" && <h1>Exercícios! Bíceps</h1>}
               {selectedContent === "costas" && <h1>Exercícios! Coastas</h1>}
               {selectedContent === "abdômen" && <h1>Exercícios! Abdômen</h1>}
