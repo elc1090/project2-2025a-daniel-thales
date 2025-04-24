@@ -25,9 +25,7 @@ export default function Exercicios() {
   }, [])
 
   const getTranslation = (translations) => {
-    const pt = translations.find(t => t.language === 7) // Português
-    const en = translations.find(t => t.language === 2) // Inglês
-    return pt || en
+    return translations.find(t => t.language === 2) // Inglês
   }
 
   return (
@@ -44,7 +42,7 @@ export default function Exercicios() {
             return (
               <li key={exercise.id} style={{ marginBottom: '1.5rem' }}>
                 <h2 style={{ fontWeight: 'bold' }}>name: {translation?.name || 'Sem nome'}</h2>
-                <p>description: {translation?.description || 'Sem descrição'}</p>
+                <p dangerouslySetInnerHTML={{ __html: translation?.description || 'Sem descrição' }} />
                 <p style={{ color: '#666' }}>category: {exercise.category?.name}</p>
               </li>
             )
