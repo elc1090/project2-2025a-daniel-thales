@@ -8,7 +8,7 @@ import {
   SidebarInset,
   SidebarProvider,
 } from "@/components/ui/sidebar"
-import { ExercisesPage } from "@/components/exercises-page"
+import ExercisesPage from "@/components/exercises-page"
 
 export const iframeHeight = "800px"
 

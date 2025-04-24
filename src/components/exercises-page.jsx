@@ -1,46 +1,52 @@
-import { Dumbbell } from "lucide-react"
+'use client'
 
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
+import { useEffect, useState } from 'react'
 
-export function ExercisesPage({
-  ...props
-}) {
+export default function ExercisesPage() {
+  const [exercises, setExercises] = useState([])
+  const [loading, setLoading] = useState(true)
 
-  const exercises = [
-    { title: "Bíceps", description: "Rosca direta e variações", content: "3 séries de 12 reps", footer: "Grupo: Braço" },
-    { title: "Costas", description: "Puxada, remada, barra", content: "4 séries de 10 reps", footer: "Grupo: Costas" },
-    { title: "Peito", description: "Supino reto e inclinado", content: "3 séries de 8 reps", footer: "Grupo: Peito" },
-    { title: "Abdômen", description: "Prancha e abdominal", content: "3x 1min + 15 reps", footer: "Grupo: Core" },
-    { title: "Perna", description: "Agachamento, leg press", content: "4 séries de 12 reps", footer: "Grupo: Inferiores" },
-    { title: "Ombro", description: "Desenvolvimento e elevação lateral", content: "3 séries de 10 reps", footer: "Grupo: Ombros" },
-  ]
+  useEffect(() => {
+    async function fetchExercises() {
+      try {
+        const res = await fetch('https://wger.de/api/v2/exerciseinfo/?language=2&limit=20')
+        const data = await res.json()
+        setExercises(data.results)
+      } catch (err) {
+        console.error('Erro ao buscar exercícios:', err)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchExercises()
+  }, [])
+
+  const getTranslation = (translations) => {
+    const pt = translations.find(t => t.language === 7) // Português
+    const en = translations.find(t => t.language === 2) // Inglês
+    return pt || en
+  }
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
-      {exercises.map((ex, i) => (
-        <Card key={i}>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Dumbbell className="w-4 h-4" />
-              {ex.title}
-            </CardTitle>
-            <CardDescription>{ex.description}</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <p>{ex.content}</p>
-          </CardContent>
-          <CardFooter>
-            <p>{ex.footer}</p>
-          </CardFooter>
-        </Card>
-      ))}
-    </div>
-  );
+    <main style={{ padding: '2rem' }}>
+      <h1 style={{ fontSize: '2rem', fontWeight: 'bold' }}>Exercícios</h1>
+      {loading ? (
+        <p>Carregando...</p>
+      ) : (
+        <ul>
+          {exercises.map((exercise) => {
+            const translation = getTranslation(exercise.translations)
+            return (
+              <li key={exercise.id} style={{ marginBottom: '1.5rem' }}>
+                <h2 style={{ fontWeight: 'bold' }}>name: {translation?.name || 'Sem nome'}</h2>
+                <p>description: {translation?.description || 'Sem descrição'}</p>
+                <p style={{ color: '#666' }}>category: {exercise.category?.name}</p>
+              </li>
+            )
+          })}
+        </ul>
+      )}
+    </main>
+  )
 }
