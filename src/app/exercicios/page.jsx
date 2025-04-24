@@ -31,13 +31,13 @@ export default function Exercicios() {
   }
 
   return (
-    <main style={{ padding: '2rem' }}>
+    <main className='h-full w-full'>
       <h1 style={{ fontSize: '2rem', fontWeight: 'bold' }}>Exercícios</h1>
-      {/* {loading ? ( */}
-        <div className='bg-black flex items-center justify-center h-full w-full'>
+      {loading ? (
+        <div className='flex items-center justify-center h-full w-full'>
           <Icons.spinner className="mr-2 h-30 w-30 animate-spin" />
         </div>
-      {/* ) : (
+       ) : (
         <ul>
           {exercises.map((exercise) => {
             const translation = getTranslation(exercise.translations)
@@ -50,7 +50,7 @@ export default function Exercicios() {
             )
           })}
         </ul>
-      )} */}
+      )}
     </main>
   )
 }
