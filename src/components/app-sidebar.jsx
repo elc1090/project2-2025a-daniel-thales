@@ -8,7 +8,8 @@ import {
   CircleUserRound,
   Settings2,
   BookHeart,
-  Dumbbell
+  Dumbbell,
+  Home
 } from "lucide-react"
 
 import { NavMain } from "@/components/nav-main"
@@ -31,6 +32,12 @@ const data = {
     avatar: "/avatars/shadcn.jpg",
   },
   navMain: [
+    {
+      title: "Início",
+      url: "/",
+      icon: Home,
+      items: [],
+    },
     {
       title: "Exercícios",
       url: "/exercicios",
