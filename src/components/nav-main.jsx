@@ -31,13 +31,10 @@ export function NavMain({
           <Collapsible key={item.title} asChild defaultOpen={item.isActive}>
             <SidebarMenuItem>
               <SidebarMenuButton asChild tooltip={item.title}>
-              <button
-                  onClick={() => onSelect(item.title.toLowerCase().replace(" ", ""))}
-                  className="flex items-center gap-2 w-full"
-                >
+                <a href={item.url}>
                   <item.icon />
                   <span>{item.title}</span>
-                </button>
+                </a>
               </SidebarMenuButton>
               {item.items?.length ? (
                 <>
@@ -52,12 +49,9 @@ export function NavMain({
                       {item.items?.map((subItem) => (
                         <SidebarMenuSubItem key={subItem.title}>
                           <SidebarMenuSubButton asChild>
-                            <button
-                                onClick={() => onSelect(subItem.title.toLowerCase().replace("ã", "a").replace("í", "i").replace(" ", ""))}
-                                className="w-full text-left"
-                              >
+                            <a href={item.url}>
                                 <span>{subItem.title}</span>
-                              </button>
+                              </a>
                           </SidebarMenuSubButton>
                         </SidebarMenuSubItem>
                       ))}
