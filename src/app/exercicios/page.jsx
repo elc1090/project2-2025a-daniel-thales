@@ -2,15 +2,9 @@
 
 import { useEffect, useState } from 'react'
 import { Icons } from "@/components/ui/icons"
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
+
 import { Button } from "@/components/ui/button"
+import { WorkoutCard } from '@/components/workout-card'
 
 export default function Exercicios() {
   const [exercises, setExercises] = useState([])
@@ -24,7 +18,7 @@ export default function Exercicios() {
       setLoading(true)
       try {
         const offset = page * limit
-        const res = await fetch(`https://wger.de/api/v2/exerciseinfo/?language=2&limit=${limit}&offset=${offset}`)
+        const res = await fetch(`https://wger.de/api/v2/exerciseinfo/?limit=${limit}&offset=${offset}`)
         const data = await res.json()
         setExercises(data.results)
         setTotalCount(data.count)
@@ -55,32 +49,10 @@ export default function Exercicios() {
       ) : (
         <>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {exercises.map((exercise) => {
-              const translation = getTranslation(exercise.translations)
+            {exercises.map((workout) => {
+              const translation = getTranslation(workout.translations)
               return (
-                <Card key={exercise.id}>
-                  <CardHeader>
-                    <CardTitle>{translation?.name || 'Sem nome'}</CardTitle>
-                    <CardDescription>Categoria: {exercise.category?.name || 'Desconhecida'}</CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <p dangerouslySetInnerHTML={{ __html: translation?.description || 'Sem descrição' }} />
-                    {exercise.images && exercise.images.length > 0 ? (
-                      <img
-                        src={exercise.images[0].image}
-                        alt={`Imagem do exercício ${translation?.name}`}
-                        className="mt-4 rounded shadow"
-                      />
-                    ) : (
-                      <div className="mt-4 w-full h-40 bg-gray-200 flex items-center justify-center rounded">
-                        <span className="text-gray-500">Imagem indisponível</span>
-                      </div>
-                    )}
-                  </CardContent>
-                  <CardFooter>
-                    <p>ID: {exercise.id}</p>
-                  </CardFooter>
-                </Card>
+                <WorkoutCard key={workout.id} workout={workout} translation={translation} />
               )
             })}
           </div>
