@@ -13,7 +13,7 @@ export default function Exercicios() {
   const [page, setPage] = useState(0)
   const [totalCount, setTotalCount] = useState(0)
   const [selectedCategory, setSelectedCategory] = useState('')
-  const limit = 20
+  const limit = 21
 
   useEffect(() => {
     async function fetchCategories() {
