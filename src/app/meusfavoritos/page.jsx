@@ -26,33 +26,16 @@ export default function MeusFavoritos() {
     async function fetchWorkouts() {
       setLoading(true);
       try {
-        const filteredExercises = [];
-        let offset = 0;
-        let currentCount = 0;
+        const favoriteExercises = [];
 
-        // Buscando os exercícios favoritos da API
-        while (currentCount < limit) {
-          const url = new URL('https://wger.de/api/v2/exerciseinfo/');
-          url.searchParams.append('limit', limit);
-          url.searchParams.append('offset', offset);
-
+        favorites.forEach(async (id) => {
+          const url = new URL(`https://wger.de/api/v2/exerciseinfo/${id}`);
           const res = await fetch(url.toString());
           const data = await res.json();
 
-          // filtrando favoritos
-          const favoriteWorkouts = data.results.filter(exercise =>
-            favorites.includes(exercise.id)
-          );
-          filteredExercises.push(...favoriteWorkouts);
-
-          currentCount = filteredExercises.length;
-          offset += limit;
-
-          // para quando nao tem mais resultados na api
-          if (data.results.length === 0) break;
-        }
-
-        setWorkouts(filteredExercises.slice(0, limit));
+          favoriteExercises.push(data);
+          setWorkouts(favoriteExercises.slice(0, limit));
+        })
       } catch (err) {
         console.error('Erro ao buscar exercícios favoritos:', err);
       } finally {
