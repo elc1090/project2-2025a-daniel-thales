@@ -46,6 +46,12 @@ export default function MeusFavoritos() {
     fetchWorkouts();
   }, [favorites]); // O useEffect é executado novamente apenas quando os favoritos mudarem (tava dando erro antes)
 
+  const onToggleFavorite = (id, isFavorite) => {
+    if (!isFavorite) {
+      setFavorites((prev) => prev.filter((favoriteId) => favoriteId !== id));
+    }
+  }
+
   return (
     <main className='h-full w-full p-4'>
       <h1 style={{ fontSize: '2rem', fontWeight: 'bold' }}>Meus Favoritos</h1>
@@ -61,7 +67,7 @@ export default function MeusFavoritos() {
               {workouts.map((workout) => {
                 const translation = workout.translations?.find(t => t.language === 2);
                 return (
-                  <WorkoutCard key={workout.id} workout={workout} translation={translation} />
+                  <WorkoutCard key={workout.id} workout={workout} translation={translation} onToggleFavorite={onToggleFavorite} />
                 );
               })}
             </div>
