@@ -2,7 +2,13 @@
 
 import { useEffect, useState } from 'react'
 import { Icons } from "@/components/ui/icons"
-
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
 import { Button } from "@/components/ui/button"
 import { WorkoutCard } from '@/components/workout-card'
 
@@ -41,7 +47,7 @@ export default function Exercicios() {
         const url = new URL('https://wger.de/api/v2/exerciseinfo/')
         url.searchParams.append('limit', limit)
         url.searchParams.append('offset', offset)
-        if (selectedCategory) url.searchParams.append('category', selectedCategory)
+        if (selectedCategory != -1) url.searchParams.append('category', selectedCategory)
 
         const res = await fetch(url.toString())
         const data = await res.json()
@@ -81,20 +87,25 @@ export default function Exercicios() {
     <main className='h-full w-full p-4'>
       <h1 style={{ fontSize: '2rem', fontWeight: 'bold' }}>Exercícios</h1>
       <div className='flex items-center justify-between mb-4'>
-        <label className="mr-4">
+        <label className="mr-4 mt-2">
           Filtrar por categoria:
-          <select
-            className="ml-2 border border-gray-300 rounded px-2 py-1"
-            onChange={(e) => {
-              setSelectedCategory(e.target.value);
-              setPage(0); // Redefine a página para a primeira ao trocar de categoria
-            }}
-          >
-            <option value="">Todas</option>
-            {categories.map(category => (
-              <option key={category.id} value={category.id}>{category.name}</option>
-            ))}
-          </select>
+
+          <Select onValueChange={(value) => {
+            setSelectedCategory(value)
+            setPage(0) // Redefine a página para a primeira ao trocar de categoria
+          }} defaultValue="-1">
+            <SelectTrigger className="w-[180px] mt-3 mb-3">
+              <SelectValue placeholder="Todas" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="-1">Todas</SelectItem>
+              {categories.map(category => (
+                <SelectItem value={category.id} key={category.id}>
+                  {category.name}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
         </label>
       </div>
 
