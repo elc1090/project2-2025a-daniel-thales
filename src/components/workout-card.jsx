@@ -11,7 +11,8 @@ import { Icons } from "@/components/ui/icons";
 
 export function WorkoutCard({
   workout,
-  translation
+  translation,
+  onToggleFavorite
 }) {
   const [isFavorite, setIsFavorite] = useState(false);
 
@@ -31,6 +32,8 @@ export function WorkoutCard({
       localStorage.setItem("favorites", JSON.stringify(favorites));
       setIsFavorite(true);
     }
+
+    onToggleFavorite(workout.id, !isFavorite);
   };
 
   return (
