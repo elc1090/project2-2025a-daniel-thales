@@ -12,6 +12,7 @@ export default function MeusFavoritos() {
   const limit = 21;
 
   useEffect(() => {
+    setLoading(true);
     // Carregar os favoritos do localStorage somente uma vez
     const favoritesFromStorage = JSON.parse(localStorage.getItem("favorites")) || [];
     setFavorites(favoritesFromStorage);
@@ -22,7 +23,6 @@ export default function MeusFavoritos() {
       setLoading(false); // Caso não haja favoritos
       return;
     }
-
     async function fetchWorkouts() {
       setLoading(true);
       try {
@@ -38,6 +38,7 @@ export default function MeusFavoritos() {
         })
       } catch (err) {
         console.error('Erro ao buscar exercícios favoritos:', err);
+        setLoading(false);
       } finally {
         setLoading(false);
       }
