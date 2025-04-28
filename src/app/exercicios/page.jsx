@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/select"
 import { Button } from "@/components/ui/button"
 import { WorkoutCard } from '@/components/workout-card'
+import { Input } from '@/components/ui/input'
 
 export default function Exercicios() {
   const [exercises, setExercises] = useState([])
@@ -19,6 +20,7 @@ export default function Exercicios() {
   const [page, setPage] = useState(0)
   const [totalCount, setTotalCount] = useState(0)
   const [selectedCategory, setSelectedCategory] = useState('')
+  const [filterText, setFilterText] = useState('')
   const limit = 21
 
   useEffect(() => {
@@ -86,7 +88,7 @@ export default function Exercicios() {
   return (
     <main className='h-full w-full p-4'>
       <h1 style={{ fontSize: '2rem', fontWeight: 'bold' }}>Exercícios</h1>
-      <div className='flex items-center justify-between mb-4'>
+      <div className='flex items-center mb-4'>
         <label className="mr-4 mt-2">
           Filtrar por categoria:
 
@@ -107,6 +109,16 @@ export default function Exercicios() {
             </SelectContent>
           </Select>
         </label>
+
+        <label className="mr-4 mt-2">
+        Filtrar por nome:
+        <Input
+          className="w-[180px] mt-3 mb-3"
+          placeholder="Pesquisar exercício..."
+          value={filterText}
+          onChange={(e) => setFilterText(e.target.value)}
+        />
+        </label>
       </div>
 
       {loading ? (
@@ -116,7 +128,12 @@ export default function Exercicios() {
       ) : (
         <>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {exercises.map((workout) => {
+            {exercises
+            .filter((workout) => {
+              const translation = getTranslation(workout.translations)
+              return translation?.name.toLowerCase().includes(filterText.toLowerCase())
+            })
+            .map((workout) => {
               const translation = getTranslation(workout.translations)
               return (
                 <WorkoutCard key={workout.id} workout={workout} translation={translation} />
