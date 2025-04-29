@@ -122,7 +122,7 @@ export function WorkoutDialog({
             </div>
             <div className="grid grid-cols-4 items-center gap-4">
               <Label className="text-right">
-                Time (m)
+                Time (min)
               </Label>
               <Input  value={timeMinutes}
                 onChange={(e) => setTimeMinutes(e.target.value)} 

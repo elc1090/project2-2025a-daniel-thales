@@ -56,16 +56,16 @@ const data = {
     },
   ],
   navSecondary: [
-    {
-      title: "Meu perfil",
-      url: "/meuperfil",
-      icon: CircleUserRound,
-    },
-    {
-      title: "Preferências",
-      url: "/preferencias",
-      icon: Settings2,
-    },
+    // {
+    //   title: "Meu perfil",
+    //   url: "/meuperfil",
+    //   icon: CircleUserRound,
+    // },
+    // {
+    //   title: "Preferências",
+    //   url: "/preferencias",
+    //   icon: Settings2,
+    // },
   ],
 }
 

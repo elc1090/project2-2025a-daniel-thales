@@ -13,7 +13,6 @@ export default function MeusFavoritos() {
 
   useEffect(() => {
     setLoading(true);
-    // Carregar os favoritos do localStorage somente uma vez
     const favoritesFromStorage = JSON.parse(localStorage.getItem("favorites")) || [];
     setFavorites(favoritesFromStorage);
   }, []); // esse useEffect só executa uma vez ao carregar o componente
