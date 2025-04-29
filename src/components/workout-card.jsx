@@ -12,7 +12,8 @@ import { Icons } from "@/components/ui/icons";
 export function WorkoutCard({
   workout,
   translation,
-  onToggleFavorite
+  onToggleFavorite,
+  onCardClick
 }) {
   const [isFavorite, setIsFavorite] = useState(false);
 
@@ -37,13 +38,15 @@ export function WorkoutCard({
   };
 
   return (
-    <Card>
+    <Card onClick={onCardClick}>
       <CardHeader className="flex justify-between items-start">
         <div>
           <CardTitle>{translation?.name || 'Sem nome'}</CardTitle>
           <CardDescription>Categoria: {workout.category?.name || 'Desconhecida'}</CardDescription>
         </div>
-        <button onClick={toggleFavorite} aria-label="Toggle Favorite">
+        <button onClick={(e) => {
+          e.stopPropagation();
+          toggleFavorite()}} aria-label="Toggle Favorite">
           <Icons.heart
             className={`h-6 w-6 ${isFavorite ? 'text-red-500' : 'text-gray-400'} transition-colors`} 
             fill={isFavorite ? 'red' : 'none'}
@@ -64,9 +67,6 @@ export function WorkoutCard({
           </div>
         )}
       </CardContent>
-      <CardFooter>
-        <p>ID: {workout.id}</p>
-      </CardFooter>
     </Card>
   );
 }
