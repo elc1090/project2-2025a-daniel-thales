@@ -1,6 +1,6 @@
 # Projeto: Consumindo uma API pública
 
-![Screenshot do projeto](https://mdswanson.com/static/chops-ux-step-4.png "Screenshot do projeto")
+<img width="1510" alt="Screenshot 2025-04-29 at 11 05 43" src="https://github.com/user-attachments/assets/880b1f73-3db5-4026-8f4a-dd6792a3dac5" />
 
 Acesso: https://project2-2025a-daniel-thales.vercel.app/
 
