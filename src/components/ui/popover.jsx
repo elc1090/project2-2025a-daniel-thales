@@ -24,7 +24,7 @@ function PopoverContent({
   ...props
 }) {
   return (
-    <PopoverPrimitive.Portal>
+
       <PopoverPrimitive.Content
         data-slot="popover-content"
         align={align}
@@ -34,7 +34,6 @@ function PopoverContent({
           className
         )}
         {...props} />
-    </PopoverPrimitive.Portal>
   );
 }
 
