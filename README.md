@@ -1,9 +1,8 @@
-Projeto disponível em:  
-https://project2-2025a-daniel-thales.vercel.app/
-
 # Projeto: Consumindo uma API pública
 
 ![Screenshot do projeto](https://mdswanson.com/static/chops-ux-step-4.png "Screenshot do projeto")
+
+Acesso: https://project2-2025a-daniel-thales.vercel.app/
 
 ### Desenvolvedores
 
