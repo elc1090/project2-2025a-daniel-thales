@@ -12,6 +12,7 @@ import {
 import { Button } from "@/components/ui/button"
 import { WorkoutCard } from '@/components/workout-card'
 import { Input } from '@/components/ui/input'
+import { WorkoutDialog } from '@/components/WorkoutDialog'
 
 export default function Exercicios() {
   const [exercises, setExercises] = useState([])
@@ -21,6 +22,10 @@ export default function Exercicios() {
   const [totalCount, setTotalCount] = useState(0)
   const [selectedCategory, setSelectedCategory] = useState('')
   const [filterText, setFilterText] = useState('')
+  const [dialogOpen, setDialogOpen] = useState(false)
+  const [selectedExercise, setSelectedExercise] = useState(null)
+  const [selectedExerciseTranslation, setSelectedExerciseTranslation] = useState(null)
+
   const limit = 21
 
   useEffect(() => {
@@ -136,7 +141,11 @@ export default function Exercicios() {
             .map((workout) => {
               const translation = getTranslation(workout.translations)
               return (
-                <WorkoutCard key={workout.id} workout={workout} translation={translation} />
+                <WorkoutCard key={workout.id} workout={workout} translation={translation} onCardClick={ () => {
+                  setSelectedExercise(workout)
+                  setSelectedExerciseTranslation(translation)
+                  setDialogOpen(true)
+                  }}/>
               )
             })}
           </div>
@@ -155,6 +164,8 @@ export default function Exercicios() {
           </div>
         </>
       )}
+
+      <WorkoutDialog dialogOpen={dialogOpen} setDialogOpen={setDialogOpen} selectedExercise={selectedExercise} selectedExerciseTranslation={selectedExerciseTranslation} />
     </main>
   )
 }
